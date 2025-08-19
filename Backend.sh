@@ -4,7 +4,6 @@ USERID=$( id -u )
 TIMESTAMP=$( date +%f-%h-%m-%s)
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1 )
 LOGFILE=$/tmp/SCRIPT_NAME-TIMESTAMP.log
-id=$( id expense) 
 
 R="\e[31m"
 G="\e[32m"
@@ -38,8 +37,8 @@ VALIDATE  $? "Enabling  nodejs 20"
 dnf install nodejs -y  &>>LOGFILE 
 VALIDATE  $? "Installing nodejs"
 
-
-if [ $id -ne 0 ]
+id expense
+if [ $? -ne 0 ]
 then 
     useradd expense &>>LOGFILE 
     VALIDATE $? "Creating useradd expense"
