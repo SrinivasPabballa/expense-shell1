@@ -49,7 +49,7 @@ else
     echo -e "User already exists.. $Y SKIPPING $N"    
 fi 
 
-mkdir -p /app
+mkdir -p /app &>>LOGFILE 
 VALIDATE  $? "Creating a directory"
 
 curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip  &>>LOGFILE 
