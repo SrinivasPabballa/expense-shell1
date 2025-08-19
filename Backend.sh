@@ -11,7 +11,7 @@ Y="\e[33m"
 N="\e[0m"
 
 echo "Please provide DB Password: " 
-read -s "mysql_root_password"
+read  "mysql_root_password"
 
 if [ $USERID -ne 0 ]
 then 
