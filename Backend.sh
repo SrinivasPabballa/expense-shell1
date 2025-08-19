@@ -10,6 +10,9 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
+echo "Please provide DB Password: " 
+read -s "mysql_root_password"
+
 if [ $USERID -ne 0 ]
 then 
     echo "Please run with superuser"
@@ -60,6 +63,24 @@ cd /app
 npm install &>>LOGFILE 
 VALIDATE  $? "Downloading the dependencies"
 
+cp /home/ec2-user/expense-shell1/backend.service /etc/systemd/system/backend.service &>>LOGFILE 
+VALIDATE  $? "copied backend service"
 
+systemctl daemon-reload &>>LOGFILE 
+VALIDATE  $? "validate daemon reload" 
 
+systemctl start backend &>>LOGFILE 
+VALIDATE  $? "Starting backend" 
+
+systemctl enable backend &>>LOGFILE 
+VALIDATE  $? "Enabling backend"
+
+dnf install mysql -y &>>LOGFILE 
+VALIDATE  $? "Installing Mysql"
+
+mysql -h db.daws-78s.online -uroot -p${mysql_root_password} < /app/schema/backend.sql &>>LOGFILE  
+VALIDATE  $? "Schema loading" 
+
+systemctl restart backend &>>LOGFILE 
+VALIDATE  $? "Restarting Backend"
 
