@@ -3,7 +3,7 @@
 USERID=$( id -u )
 TIMESTAMP=$( date +%f-%h-%m-%s)
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1 )
-LOGFILE=$/tmp/SCRIPT_NAME-TIMESTAMP.log
+LOGFILE=/tmp/$TIMESTAMP-$SCRIPTNAME.log
 
 R="\e[31m"
 G="\e[32m"
@@ -83,6 +83,6 @@ mysql -h db.daws-78s.online -uroot -p${mysql_root_password} < /app/schema/backen
 VALIDATE  $? "Schema loading" 
 
 systemctl restart backend &>>LOGFILE 
-VALIDATE  $? "Restarting Backend"
+VALIDATE  $? "Restarting Backend" 
 
 
