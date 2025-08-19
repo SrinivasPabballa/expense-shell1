@@ -22,11 +22,28 @@ VALIDATE (){
 
     if [ $1-ne 0 ]
     then 
-        echo -e "$2..$R FAILURE $N "
+        echo -e "$2..$R FAILURE $N"
     else 
-        echo "$2..$G SUCCESS $N" 
+        echo -e "$2..$G SUCCESS $N" 
    fi      
 }       
 
+dnf module disable nodejs -y &>>LOGFILE
+VALIDATE $? "Disabling nodejs" 
+
+dnf module enable nodejs:20 -y &>>LOGFILE
+VALIDATE  $? "Enabling  nodejs 20" 
+
+dnf install nodejs -y  &>>LOGFILE 
+VALIDATE  $? "Installing nodejs"
+
+id expense
+if [ $? -ne 0 ]
+then 
+    useradd expense &>>LOGFILE 
+    VALIDATE $? "Creating useradd expense"
+else 
+    echo -e "User already exists.. $Y SKIPPING $N"    
+fi 
 
 
