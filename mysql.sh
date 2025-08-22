@@ -43,7 +43,7 @@ if [ $USERID -ne 0 ]
   systemctl start mysqld &>>$LOGFILE 
   VALIDATE $? "Starting MySql"
 
-  mysql -h db.daws-78s.online -uroot -p${mysql_root_password} -e 'show databases;' &>>$LOGFILE
+  mysql -h 54.158.63.80 -uroot -p${mysql_root_password} -e 'show databases;' &>>$LOGFILE
    if [ $? -eq 0 ]
     then 
          mysql_secure_installation --set-root-pass ${mysql_root_password}  &>>$LOGFILE 
