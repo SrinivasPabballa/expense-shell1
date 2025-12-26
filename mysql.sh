@@ -51,4 +51,8 @@ if [ $USERID -ne 0 ]
          exit 1
     else 
          echo -e "MySql Root Password is already setup..$Y SKIPPING $N" 
-    fi          
+    fi      
+        
+    systemctl restart mysqld &>>$LOGFILE 
+    VALIDATE  $? "Restarting mysql"
+ 
