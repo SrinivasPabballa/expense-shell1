@@ -43,7 +43,7 @@ if [ $USERID -ne 0 ]
   systemctl start mysqld &>>$LOGFILE 
   VALIDATE $? "Starting MySql"
 
-  mysql -h 172.31.21.21 -uroot -p${mysql_root_password} -e 'show databases;' &>>$LOGFILE
+  mysql -h 172.31.25.56 -uroot -p${mysql_root_password} -e 'show databases;' &>>$LOGFILE
    if [ $? -eq 0 ]
     then 
          mysql_secure_installation --set-root-pass ${mysql_root_password}  &>>$LOGFILE 
@@ -52,7 +52,7 @@ if [ $USERID -ne 0 ]
     else 
          echo -e "MySql Root Password is already setup..$Y SKIPPING $N" 
     fi      
-        
+
     systemctl restart mysqld &>>$LOGFILE 
     VALIDATE  $? "Restarting mysql"
  

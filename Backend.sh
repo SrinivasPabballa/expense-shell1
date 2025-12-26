@@ -85,7 +85,7 @@ VALIDATE  $? "Restarting Backend"
 # mysql -h db.srinivasp.online -uroot -p${mysql_root_password} < /app/schema/backend.sql &>>$LOGFILE  
 # VALIDATE  $? "Schema loading" 
 
-mysql -h 172.31.21.21 -uroot -p${mysql_root_password} < /app/schema/backend.sql &>>$LOGFILE
+mysql -h 172.31.25.56 -uroot -p${mysql_root_password} < /app/schema/backend.sql &>>$LOGFILE
 VALIDATE $? "Schema loading"
 
 systemctl restart backend &>>$LOGFILE 
