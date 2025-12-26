@@ -79,6 +79,9 @@ VALIDATE  $? "Enabling backend"
 dnf install mysql -y &>>$LOGFILE 
 VALIDATE  $? "Installing Mysql"
 
+systemctl restart backend &>>$LOGFILE 
+VALIDATE  $? "Restarting Backend"
+
 # mysql -h db.srinivasp.online -uroot -p${mysql_root_password} < /app/schema/backend.sql &>>$LOGFILE  
 # VALIDATE  $? "Schema loading" 
 
